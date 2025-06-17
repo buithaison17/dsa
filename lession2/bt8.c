@@ -1,5 +1,20 @@
 #include<stdio.h>
 
+void findCharacter(int arr[], int n){
+    for(int i = 0; i < n; i++){
+        int check = 0;
+        for(int j = i + 1; j < n; j++){
+            if(arr[i] < arr[j]){
+                check = 1;
+                break;
+            }
+        }
+        if(!check){
+            printf("%d ", arr[i]);
+        }
+    }
+}
+
 int main(){
     int n, arr[100];
     printf("Nhập số lượng phần tử: ");
@@ -9,7 +24,7 @@ int main(){
             printf("Nhập phần tử arr[%d]: ", i);
             scanf("%d", &arr[i]);
         }
-        countCharacter(arr, n);
     }
+    findCharacter(arr, n);
     return 0;
 }
