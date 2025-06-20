@@ -34,6 +34,10 @@ int main(){
                 }
             }
             sumArr(arr, rows, cols);
+            for(int i = 0; i < cols; i++){
+                free(arr[i]);
+            }
+            free(arr);
         }
         else{
             printf("Số cột không hợp lệ");
