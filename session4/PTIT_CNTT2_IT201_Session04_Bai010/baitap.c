@@ -28,7 +28,6 @@ int main(){
     printf("Nhập tên phần tử muốn tìm kiếm: ");
     fgets(nameSearch, 100, stdin);
     nameSearch[strcspn(nameSearch, "\n")] =  '\0';
-    toLowerCase(nameSearch);
     for(int i = 0; i < 5; i++){
         char fullName[100];
         strcpy(fullName, students[i].name);
