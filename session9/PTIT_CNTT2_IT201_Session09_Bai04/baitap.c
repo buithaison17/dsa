@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct Node{
+    int data;
+    struct Node* next;
+} Node;
+
+Node* createNode(int data){
+    Node* newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+int getLengthNode(Node* head){
+    int length = 0;
+    Node* current = head;
+    while(current != NULL){
+        length++;
+        current = current->next;
+    }
+    return length;
+}
+
+int main(){
+    Node* head = createNode(1);
+    Node* node1 = createNode(2);
+    Node* node2 = createNode(3);
+    Node* node3 = createNode(4);
+    Node* node4 = createNode(5);
+
+    head->next = node1;
+    node1->next = node2;
+    node2->next = node3;
+    node3->next = node4;
+    
+    int length = getLengthNode(head);
+    printf("Độ dài của danh sách liên kết: %d", length);
+
+    return 0;
+}
