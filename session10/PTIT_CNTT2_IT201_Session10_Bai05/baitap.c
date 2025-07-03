@@ -65,7 +65,6 @@ void deleteNodeByValue(Node** head, int data){
             temp = current->next;
             current->next = current->next->next;
             free(temp);
-            return;
         }
         current = current->next;
     }
@@ -80,7 +79,7 @@ int main(){
     Node* head = NULL;
     int dataDelete;
     pushNode(&head, 30);
-    pushNode(&head, 20);
+    pushNode(&head, 50);
     pushNode(&head, 10);
     pushNode(&head, 50);
     pushNode(&head, 0);
