@@ -56,7 +56,6 @@ void deleteNodeByValue(Node** head, int data){
         *head = (*head)->next;
         free(temp);
         found = 1;
-        return;
     }
 
     while(current != NULL && current->next != NULL){
