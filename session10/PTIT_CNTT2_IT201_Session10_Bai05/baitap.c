@@ -51,13 +51,6 @@ void deleteNodeByValue(Node** head, int data){
     Node* temp = NULL;
     int found = 0;
 
-    if(current->data == data){
-        temp = *head;
-        *head = (*head)->next;
-        free(temp);
-        found = 1;
-    }
-
     while(current != NULL && current->next != NULL){
         if(current->next->data == data){
             found = 1;
@@ -66,6 +59,13 @@ void deleteNodeByValue(Node** head, int data){
             free(temp);
         }
         current = current->next;
+    }
+
+    if((*head)->data == data){
+        found = 1;
+        temp = *head;
+        (*head) = (*head)->next;
+        free(temp);
     }
 
     if(!found){
@@ -77,7 +77,7 @@ void deleteNodeByValue(Node** head, int data){
 int main(){
     Node* head = NULL;
     int dataDelete;
-    pushNode(&head, 30);
+    pushNode(&head, 50);
     pushNode(&head, 50);
     pushNode(&head, 10);
     pushNode(&head, 50);
