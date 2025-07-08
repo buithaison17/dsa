@@ -5,10 +5,10 @@
 
 int top = -1;
 
-void push(char stack[], char infix){
+void push(char stack[], char value){
     if(top >= MAX - 1) return;
     top++;
-    stack[top] = infix;
+    stack[top] = value;
 }
 
 char pop(char stack[]){
@@ -42,7 +42,7 @@ void convertToPostfix(char stack[], char infix[], char postfix[]){
             pop(stack);
         }
         else if(ch == '+' || ch == '-' || ch == '*' || ch == '/'){
-            if(top != -1 && compareOperator(stack[top]) >= compareOperator(ch)){
+            while(top != -1 && compareOperator(stack[top]) >= compareOperator(ch)){
                 postfix[index++] = pop(stack);
             }
             push(stack, ch);
