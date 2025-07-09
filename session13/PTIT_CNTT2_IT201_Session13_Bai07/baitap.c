@@ -32,10 +32,10 @@ void printStack(char stack[]){
 }
 
 int isMatching(char open, char close){
-    if(open == '[' && close == ']') return 0;
-    if(open == '(' && close == ')') return 0;
-    if(open == '{' && close == '}') return 0;
-    return 1;
+    if(open == '[' && close == ']') return 1;
+    if(open == '(' && close == ')') return 1;
+    if(open == '{' && close == '}') return 1;
+    return 0;
 }
 
 int isValidBrackets(char stack[], char str[]){
