@@ -7,6 +7,49 @@ typedef struct Node{
     struct Node* right;
 } Node;
 
+typedef struct QueueNode{
+    Node* treeNode;
+    struct QueueNode* next;
+} QueueNode;
+
+typedef struct Queue{
+    QueueNode* front;
+    QueueNode* rear;
+    int size;
+} Queue;
+
+void initQueue(Queue** q){
+    *q = (Queue*)malloc(sizeof(Queue));
+    (*q)->front = NULL;
+    (*q)->rear = NULL;
+    (*q)->size = 0;
+}
+
+void enqueue(Queue** q, Node* data){
+    QueueNode* newNode = (QueueNode*)malloc(sizeof(QueueNode));
+    newNode->treeNode = data;
+    newNode->next = NULL;
+    if((*q)->size == 0){
+        (*q)->front = newNode;
+        (*q)->rear = newNode;
+    }
+    else{
+        (*q)->rear->next = newNode;
+        (*q)->rear = newNode;
+    }
+    (*q)->size++;
+}
+
+Node* dequeue(Queue** q){
+    if((*q)->size == 0) return NULL;
+    QueueNode* temp = (*q)->front;
+    Node* tempData = temp->treeNode;
+    free(temp);
+    (*q)->size--;
+    if((*q)->size == 0) (*q)->rear = NULL;
+    return tempData;
+}
+
 Node* createNode(int data){
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->data = data;
@@ -15,33 +58,48 @@ Node* createNode(int data){
     return newNode;
 }
 
-Node* insert(Node* root, int data){
-    if(root == NULL) return createNode(data);
-    if(root->left == NULL){
-        root->left = createNode(data);
+void insert(Node** root, int data){
+    if(*root == NULL){
+        *root = createNode(data);
+        return;
     }
-    else if(root->right == NULL){
-        root->right = createNode(data);
+
+    Queue* q;
+    initQueue(&q);
+    enqueue(&q, *root);
+
+    while(q->size != 0){
+        Node* current = dequeue(&q);
+        if(current->left == NULL){
+            current->left = createNode(data);
+            return;
+        }
+        else{
+            enqueue(&q, current->left);
+        }
+        if(current->right == NULL){
+            current->right = createNode(data);
+            return;
+        }
+        else{
+            enqueue(&q, current->right);
+        }
     }
-    else{
-        insert(root->left, data);
-    }
-    return root;
 }
 
-void inorder(Node* root){
+void preorder(Node* root){
     if(root == NULL) return;
-    inorder(root->left);
     printf("%d ", root->data);
-    inorder(root->right);
+    preorder(root->left);
+    preorder(root->right);
 }
 
 int main(){
-    Node* root = createNode(2);
-    root->left = createNode(3);
-    root->right = createNode(4);
-    root->left->left = createNode(5);
-    insert(root, 6);
-    inorder(root);
+    Node* root = NULL;
+    insert(&root, 5);
+    insert(&root, 3);
+    insert(&root, 2);
+    insert(&root, 4);
+    preorder(root);
     return 0;
 }
