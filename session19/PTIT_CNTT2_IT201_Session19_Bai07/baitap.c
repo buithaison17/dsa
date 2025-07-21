@@ -43,6 +43,7 @@ void enqueue(Queue** q, Node* data){
 Node* dequeue(Queue** q){
     if((*q)->size == 0) return NULL;
     QueueNode* temp = (*q)->front;
+    (*q)->front = (*q)->front->next;
     Node* tempData = temp->treeNode;
     free(temp);
     (*q)->size--;
