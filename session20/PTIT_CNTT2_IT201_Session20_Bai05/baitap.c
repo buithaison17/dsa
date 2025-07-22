@@ -70,15 +70,15 @@ Node* findMax(Node* root){
     while(q->size){
         Node* current = dequeue(&q);
         if(current->left != NULL){
+            enqueue(&q, current->left);
             if(current->left->data > max->data){
                 max = current->left;
-                enqueue(&q, current->left);
             }
         }
         if(current->right != NULL){
+            enqueue(&q, current->right);
             if(current->right->data > max->data){
                 max = current->right;
-                enqueue(&q, current->right);
             }
         }
     }
