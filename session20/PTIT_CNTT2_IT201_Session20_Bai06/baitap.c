@@ -69,24 +69,28 @@ int findLevelOfNode(Node* root, int data){
     enqueue(&q, root);
 
     while(q->size){
-        Node* current = dequeue(&q);
+        int n  = q->size;
+        for(int i = 0; i < n; i++){
+            Node* current = dequeue(&q);
+            level++;
+            if(current->left != NULL){
+                if(current->left->data == data){
+                    return level;
+                }
+                else{
+                    enqueue(&q, current->left);
+                }
+            }
+            if(current->right != NULL){
+                if(current->right->data == data){
+                    return level;
+                }
+                else{
+                    enqueue(&q, current->right);
+                }
+            }
+        }
         level++;
-        if(current->left != NULL){
-            if(current->left->data == data){
-                return level;
-            }
-            else{
-                enqueue(&q, current->left);
-            }
-        }
-        if(current->right != NULL){
-            if(current->right->data == data){
-                return level;
-            }
-            else{
-                enqueue(&q, current->right);
-            }
-        }
     }
     return -1;
 }
