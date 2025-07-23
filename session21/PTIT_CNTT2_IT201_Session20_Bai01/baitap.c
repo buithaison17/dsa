@@ -18,7 +18,7 @@ void printMatrix(){
 }
 
 int main(){
-    addEdge(1, 2);
+    addEdge(0, 1);
     printMatrix();
     return 0;
 }
